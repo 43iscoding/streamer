@@ -12,6 +12,8 @@ public class TextFromFile : MonoBehaviour
 	private string pathBase = "C:\\Users\\User\\Desktop\\Twitch Alerts\\";
 	private string extention = ".txt";
 
+	public static readonly string DELIMETER = " %DELIMETER% ";
+
 	public int updateFrequency = 1;
 
 	private float lastUpdated;
@@ -75,9 +77,14 @@ public class TextFromFile : MonoBehaviour
 	string PostProcess(string text)
 	{
 		if (text == null) return null;
-
-		text = text.ToUpper();
-		text = text.Replace("Â‚¬", ""); //Get rid of EUR sign
+		
+		Debug.Log(text);
+		//text = text.ToUpper();
+		text = text.Replace("â‚¬", ""); //Get rid of EUR sign
+		if (text.Contains(DELIMETER))
+		{
+			return text.Split(new [] { DELIMETER }, StringSplitOptions.None)[0];
+		}
 		return text;
 	}
 }

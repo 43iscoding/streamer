@@ -34,12 +34,4 @@ public class WindowsVoice : MonoBehaviour {
 			theVoice = null;
 		}
 	}
-
-	public void Update()
-	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			Speak("This is a test donation by Kappa");
-		}
-	}
 }

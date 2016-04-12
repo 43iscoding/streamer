@@ -9,12 +9,14 @@ public class TwitchAlertsTest : MonoBehaviour
 	private string pathBase = "C:\\Users\\User\\Desktop\\Twitch Alerts\\";
 	private string extention = ".txt";
 
-	public bool donationMode;	
+	public bool donationMode;
+
+	public KeyCode key = KeyCode.F10;
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.F10))
+		if (Input.GetKeyDown(key))
 		{
 			if (donationMode)
 			{
@@ -30,6 +32,19 @@ public class TwitchAlertsTest : MonoBehaviour
 	private void FakeDonation()
 	{
 		string path = pathBase + TwitchAlertsType.most_recent_donator + extention;
+		try
+		{
+			StreamWriter writer = new StreamWriter(path);
+			using (writer)
+			{
+				writer.WriteLine("TestUser" + Random.Range(1, 999) + " ($" + Random.Range(1,100) + ".00)" + TextFromFile.DELIMETER + "This is a test donation Kappa Keepo Kappa");
+			}
+			writer.Close();
+		}
+		catch (Exception e)
+		{
+			Debug.LogError(e);
+		}
 	}
 
 	private void FakeFollow()
