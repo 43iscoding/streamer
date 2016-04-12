@@ -70,10 +70,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ComponentToggle.cs" />
+    <Compile Include="Assets\Scripts\FollowerAlert.cs" />
     <Compile Include="Assets\Scripts\HueShift.cs" />
     <Compile Include="Assets\Scripts\Kino\Glitch\AnalogGlitch.cs" />
     <Compile Include="Assets\Scripts\Kino\Glitch\DigitalGlitch.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\Messenger\Callback.cs" />
+    <Compile Include="Assets\Scripts\Messenger\Messenger.cs" />
     <Compile Include="Assets\Scripts\Moments\Gif\GifEncoder.cs" />
     <Compile Include="Assets\Scripts\Moments\Gif\GifFrame.cs" />
     <Compile Include="Assets\Scripts\Moments\Gif\LzwEncoder.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="Assets\Scripts\ScaleTween.cs" />
     <Compile Include="Assets\Scripts\TextCycle.cs" />
     <Compile Include="Assets\Scripts\TextFromFile.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlertsTest.cs" />
     <Compile Include="Assets\Scripts\TwitchAlertsType.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,7 @@ public class TextFromFile : MonoBehaviour
 	public int updateFrequency = 1;
 
 	private float lastUpdated;
+	private string lastValue = null;
 
 	private string FilePath
 	{
@@ -26,8 +27,8 @@ public class TextFromFile : MonoBehaviour
 
 	// Use this for initialization
 	void Start ()
-	{		
-		ReadFile();	
+	{
+		ReadFile();
 	}
 	
 	// Update is called once per frame
@@ -51,7 +52,17 @@ public class TextFromFile : MonoBehaviour
 			StreamReader reader = new StreamReader(FilePath, Encoding.Default);
 			using (reader)
 			{
-				text.text = PostProcess(reader.ReadLine());
+				string line = reader.ReadLine();
+				text.text = PostProcess(line);
+				if (lastValue != null && lastValue != line)
+				{
+					//Broadcast change
+					if (Messenger.eventTable.ContainsKey(type.ToString()))
+					{
+						Messenger.Broadcast(type.ToString(), line);	
+					}
+				}
+				lastValue = line;
 			}
 			reader.Close();
 		}
