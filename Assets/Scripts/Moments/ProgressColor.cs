@@ -21,6 +21,6 @@ public class ProgressColor : MonoBehaviour
 		{
 			Debug.LogError("Could not parse " + text.text + " - not a number");
 		}
-		text.color = Color.Lerp(from, to, value);
+		text.color = Color.Lerp(from, to, value / target);
 	}
 }

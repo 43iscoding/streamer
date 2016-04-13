@@ -1,0 +1,7 @@
+TODOs:
+
+* Twitch emoticons displayed in donations
+* Cool text effects
+* Game overlays
+* Variations
+* Separate notification overlay screen
