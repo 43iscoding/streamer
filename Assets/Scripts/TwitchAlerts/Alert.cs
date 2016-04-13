@@ -46,7 +46,7 @@ public abstract class Alert : MonoBehaviour
 		SetContent(data);
 		yield return new WaitForSeconds(duration);
 		text.text = "";
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(1);
 		alertInProgress = false;
 	}
 
