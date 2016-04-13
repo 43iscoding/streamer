@@ -5,11 +5,14 @@ using System.Collections.Generic;
 public abstract class Alert : MonoBehaviour
 {
 	public TextMesh text;	
-	public float duration = 3f;
+	public float duration = 3f;	
 
 	public AudioClip sound;
 
 	public AudioSource audioSource;
+
+	public ParticleSystem particleSystem;
+	public float particlesDuration;
 
 	private Queue<string> queue = new Queue<string>();
 
@@ -36,9 +39,21 @@ public abstract class Alert : MonoBehaviour
 		}
 	}
 
+	protected IEnumerator ParticleCoroutine()
+	{
+		if (!particleSystem) yield break;
+
+		particleSystem.Play();
+
+		yield return new WaitForSeconds(particlesDuration);
+
+		particleSystem.Stop();
+	}
+
 	protected virtual IEnumerator ProcessAlert(string data)
 	{
 		alertInProgress = true;
+		StartCoroutine(ParticleCoroutine());
 		if (sound && audioSource)
 		{
 			audioSource.PlayOneShot(sound);
