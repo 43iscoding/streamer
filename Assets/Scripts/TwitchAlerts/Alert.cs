@@ -7,9 +7,13 @@ public abstract class Alert : MonoBehaviour
 	public TextMesh text;	
 	public float duration = 3f;
 
+	public AudioClip sound;
+
+	public AudioSource audioSource;
+
 	private Queue<string> queue = new Queue<string>();
 
-	private static bool alertInProgress;
+	protected static bool alertInProgress;
 
 	protected virtual void Start()
 	{
@@ -32,13 +36,16 @@ public abstract class Alert : MonoBehaviour
 		}
 	}
 
-	IEnumerator ProcessAlert(string data)
+	protected virtual IEnumerator ProcessAlert(string data)
 	{
 		alertInProgress = true;
+		if (sound && audioSource)
+		{
+			audioSource.PlayOneShot(sound);
+		}
 		SetContent(data);
 		yield return new WaitForSeconds(duration);
 		text.text = "";
-		Cleanup();
 		yield return new WaitForSeconds(2f);
 		alertInProgress = false;
 	}
@@ -46,6 +53,4 @@ public abstract class Alert : MonoBehaviour
 	protected abstract void SetContent(string data);
 
 	protected abstract TwitchAlertsType Type();
-
-	protected virtual void Cleanup() { }
 }

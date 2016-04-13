@@ -77,9 +77,7 @@ public class TextFromFile : MonoBehaviour
 	string PostProcess(string text)
 	{
 		if (text == null) return null;
-		
-		Debug.Log(text);
-		//text = text.ToUpper();
+
 		text = text.Replace("â‚¬", ""); //Get rid of EUR sign
 		if (text.Contains(DELIMETER))
 		{
