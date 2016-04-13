@@ -4,4 +4,7 @@ TODOs:
 * Cool text effects
 * Game overlays
 * Variations
+* Build script for Streamer/Notification
+
+DONE:
 * Separate notification overlay screen
