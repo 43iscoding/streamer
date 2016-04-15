@@ -50,26 +50,20 @@ public class TwitchAlertsTest : MonoBehaviour
 
 	private List<string> messages = new List<string>()
 	{
-		"For kawai",
-		"Labs darbs!",
-		"thx dude, i really enjoyed it!",
-		"hallo xlie",
-		"thanks",
-		"This is not much, but keep playing man, you're awesome",
-		"Sounds great let me buy you a coffee in the morning sir. nice stream"
+//		"For kawai",
+//		"Labs darbs!",
+//		"thx dude, i really enjoyed it!",
+//		"hallo xlie",
+//		"thanks",
+//		"This is not much, but keep playing man, you're awesome",
+//		"Sounds great let me buy you a coffee in the morning sir. nice stream",
+		"Sounds great Kappa let me buy you a coffee 4Head in the morning sir. nice stream"
 
 	};
-		
-	List<string> emoticons = new List<string>()
-	{
-		"Kappa", "Keepo", "4Head", "BibleThump", "DansGame", "OpieOP"
-	};
-
-
 
 	private string RandomDonationMessage()
 	{
-		return messages[Random.Range(0, messages.Count - 1)];
+		return messages[Random.Range(0, messages.Count - 1)] + " " + TwitchEmotes.RandomEmote();
 	}
 
 	private void FakeFollow()

@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -96,11 +90,13 @@
     <Compile Include="Assets\Scripts\ScaleTween.cs" />
     <Compile Include="Assets\Scripts\TextCycle.cs" />
     <Compile Include="Assets\Scripts\TextFromFile.cs" />
+    <Compile Include="Assets\Scripts\TextMeshWrapper.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\Alert.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\DonationAlert.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\FollowerAlert.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\TwitchAlertsTest.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\TwitchAlertsType.cs" />
+    <Compile Include="Assets\Scripts\TwitchEmotes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
