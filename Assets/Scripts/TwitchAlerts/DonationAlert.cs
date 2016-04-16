@@ -70,7 +70,6 @@ public class DonationAlert : Alert
 	{
 		int words = toSpeak.Split(' ').Length;
 		float estimation = words / averageWordsPerSecond;
-		Debug.Log(toSpeak + " (" + words + ") -> " + estimation);
 		return estimation;
 	}
 

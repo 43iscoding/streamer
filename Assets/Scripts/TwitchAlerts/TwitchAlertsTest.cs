@@ -37,8 +37,7 @@ public class TwitchAlertsTest : MonoBehaviour
 			StreamWriter writer = new StreamWriter(path);
 			using (writer)
 			{
-				writer.WriteLine("TestUser" + Random.Range(1, 999) + " ($" + Random.Range(1,100) + ".00)" + TextFromFile.DELIMETER + RandomDonationMessage());
-				//TODO: Add donation message generator
+				writer.WriteLine("TestUser" + Random.Range(1, 999) + " ($" + Random.Range(1,100) + ".00)" + TextFromFile.DELIMETER + RandomDonationMessage());				
 			}
 			writer.Close();
 		}
@@ -50,20 +49,17 @@ public class TwitchAlertsTest : MonoBehaviour
 
 	private List<string> messages = new List<string>()
 	{
-//		"For kawai",
-//		"Labs darbs!",
-//		"thx dude, i really enjoyed it!",
-//		"hallo xlie",
-//		"thanks",
-//		"This is not much, but keep playing man, you're awesome",
-//		"Sounds great let me buy you a coffee in the morning sir. nice stream",
-		"Sounds great Kappa let me buy you a coffee 4Head in the morning sir. nice stream"
-
+		"Nice stream bro! Kappa Please play Darude Sandstorm dududu dududu dududu dududu dududu dududu"
 	};
 
-	private string RandomDonationMessage()
+	private string RandomDonationMessage(int emotes = 0)
 	{
-		return messages[Random.Range(0, messages.Count - 1)] + " " + TwitchEmotes.RandomEmote();
+		string message = messages[Random.Range(0, messages.Count - 1)];
+		for (int i = 0; i < emotes; i++)
+		{
+			message += TwitchEmotes.RandomEmote() + " ";
+		}
+		return message;
 	}
 
 	private void FakeFollow()
