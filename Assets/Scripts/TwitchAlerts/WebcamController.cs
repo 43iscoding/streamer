@@ -5,12 +5,21 @@ using UnityEngine.UI;
 public class WebcamController : MonoBehaviour
 {
 
+	public static string onSceneReload = "onSceneReload";
+
 	public Material material;
 	public RawImage image;
 
 	private WebCamTexture webcamTexture;
 	
 	void Start () {
+		Messenger.AddListener(onSceneReload, () =>
+		{
+			if (webcamTexture != null)
+			{
+				webcamTexture.Stop();
+			}
+		});
 		webcamTexture = new WebCamTexture(1920, 1080);
 		SetTexture();
 		webcamTexture.Play();
