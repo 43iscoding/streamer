@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\TwitchAlerts\Alert.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\DonationAlert.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\FollowerAlert.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\SocialController.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\TwitchAlertsTest.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\TwitchAlertsType.cs" />
     <Compile Include="Assets\Scripts\TwitchEmotes.cs" />
