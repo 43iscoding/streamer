@@ -186,6 +186,9 @@ public class SocialController : MonoBehaviour
 			text.color = new Color(textColor.r, textColor.g, textColor.b, value);
 			sprite.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, value);
 			yield return null;
-		}		
+		}
+
+		text.color = new Color(textColor.r, textColor.g, textColor.b, inc ? 1 : 0);
+		sprite.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, inc ? 1 : 0);
 	}
 }

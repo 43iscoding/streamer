@@ -21,6 +21,8 @@ public class TextMeshWrapper : MonoBehaviour
 
 	private void ProcessEmoticons(string text)
 	{
+		if (textMesh == null) return;
+
 		if (text == "")
 		{
 			textMesh.text = "";
