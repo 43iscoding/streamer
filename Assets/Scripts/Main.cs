@@ -19,7 +19,7 @@ public class Main : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.F2))
 		{
-			SceneManager.LoadScene("Layout");
+			SceneManager.LoadScene("New");
 			return;
 		}
 		

@@ -67,7 +67,8 @@ public class SocialController : MonoBehaviour
 			{SocialType.Twitter, "FOLLOWXLIII"},
 			{SocialType.Instagram, "FOLLOWXLIII"},
 			{SocialType.Soundcloud, "FOLLOWXLIII"},
-		};		
+		};
+		SetSmall();
 	}
 
 	void SetBig()

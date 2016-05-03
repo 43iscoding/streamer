@@ -27,7 +27,7 @@ public class WebcamController : MonoBehaviour
 		{
 			image.texture = webcamTexture;
 			image.material.mainTexture = webcamTexture;
-		}		
+		}
 	}
 		
 	void Update ()
