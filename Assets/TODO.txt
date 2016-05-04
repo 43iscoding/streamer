@@ -1,10 +1,10 @@
 TODOs:
 
-* Twitch emoticons displayed in donations
 * Cool text effects
 * Game overlays
 * Variations
 
 DONE:
+* Twitch emoticons displayed in donations
 * Separate notification overlay screen
 * Build script for Streamer/Notification

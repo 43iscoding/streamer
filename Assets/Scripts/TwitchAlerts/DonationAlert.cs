@@ -26,6 +26,7 @@ public class DonationAlert : Alert
 			audioSource.PlayOneShot(sound);
 		}
 		StartCoroutine(ParticleCoroutine());
+		SetLayoutText(data, false);
 		SetContent(data);
 		
 		yield return new WaitForSeconds(duration);
@@ -55,8 +56,14 @@ public class DonationAlert : Alert
 
 		alertText.text = top[0] + "just donated " + top[1].Replace(")", "");
 		message.text = entries[1];
-		SetLayoutText(entries[0]);
 		StartCoroutine(VoiceCoroutine(entries[1], sound.length));
+	}
+
+	protected override void SetLayoutText(string message, bool instant)
+	{
+		message = message.Split(new[] { TextFromFile.DELIMETER }, StringSplitOptions.None)[0];
+		message = message.Replace("â‚¬", ""); //Get rid of EUR sign
+		SetLayoutText(layoutText, message, instant);
 	}
 
 	IEnumerator VoiceCoroutine(string toSpeak, float delay)

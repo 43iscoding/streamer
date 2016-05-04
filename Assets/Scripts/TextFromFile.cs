@@ -67,12 +67,12 @@ public class TextFromFile : MonoBehaviour
 				{
 					text.text = PostProcess(line);
 				}
-				if (lastValue != null && lastValue != line)
+				if (lastValue != line)
 				{
 					//Broadcast change
 					if (Messenger.eventTable.ContainsKey(type.ToString()))
 					{
-						Messenger.Broadcast(type.ToString(), prepend + line + append);	
+						Messenger.Broadcast(type.ToString(), prepend + line + append, lastValue == null);
 					}
 				}
 				lastValue = line;

@@ -10,12 +10,12 @@ public class TextMeshWrapper : MonoBehaviour
 	void Start ()
 	{
 		textMesh = GetComponent<TextMesh>();
-		
 	}
 
 	public string text
 	{
 		get { return textMesh.text; }
+		//TODO: Animated text change
 		set { ProcessEmoticons(value); }
 	}	
 

@@ -25,12 +25,17 @@ public abstract class Alert : MonoBehaviour
 
 	protected virtual void Start()
 	{
-		Messenger.AddListener<string>(Type().ToString(), OnAlert);
+		Messenger.AddListener<string, bool>(Type().ToString(), OnAlert);
 		alertText.text = "";
 	}
 
-	void OnAlert(string data)
+	void OnAlert(string data, bool init)
 	{
+		if (init)
+		{
+			SetLayoutText(data, true);
+			return;
+		}
 		queue.Enqueue(data);
 	}
 
@@ -58,7 +63,7 @@ public abstract class Alert : MonoBehaviour
 	protected virtual IEnumerator ProcessAlert(string data)
 	{
 		alertInProgress = true;
-		SetLayoutText(data);
+		SetLayoutText(data, false);
 		StartCoroutine(ParticleCoroutine());
 		if (sound && audioSource)
 		{
@@ -71,16 +76,23 @@ public abstract class Alert : MonoBehaviour
 		alertInProgress = false;
 	}
 
-	protected void SetLayoutText(string message)
+	protected virtual void SetLayoutText(string message, bool instant)
 	{
-		SetLayoutText(layoutText, message);
+		SetLayoutText(layoutText, message, instant);
 	}
 
-	protected void SetLayoutText(TextMesh textMesh, string message)
+	protected void SetLayoutText(TextMesh textMesh, string message, bool instant)
 	{
 		if (textMesh == null) return;
 
-		RotateLayoutText(textMesh, message);
+		if (instant)
+		{
+			textMesh.text = message;
+		}
+		else
+		{
+			RotateLayoutText(textMesh, message);
+		}
 	}
 
 	void RotateLayoutText(TextMesh textMesh, string message)
