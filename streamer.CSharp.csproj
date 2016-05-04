@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ComponentToggle.cs" />
+    <Compile Include="Assets\Scripts\Extensions.cs" />
     <Compile Include="Assets\Scripts\HueShift.cs" />
     <Compile Include="Assets\Scripts\Kino\Glitch\AnalogGlitch.cs" />
     <Compile Include="Assets\Scripts\Kino\Glitch\DigitalGlitch.cs" />

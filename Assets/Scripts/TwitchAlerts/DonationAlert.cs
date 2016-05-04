@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DonationAlert : Alert
 {
+	[Header("Donation")]
 	public TextMeshWrapper message;
 
 	private float averageWordsPerSecond = 2.166f;
@@ -20,15 +21,15 @@ public class DonationAlert : Alert
 	protected override IEnumerator ProcessAlert(string data)
 	{
 		alertInProgress = true;
-		StartCoroutine(ParticleCoroutine());
 		if (sound && audioSource)
 		{
 			audioSource.PlayOneShot(sound);
 		}
+		StartCoroutine(ParticleCoroutine());
 		SetContent(data);
 		
 		yield return new WaitForSeconds(duration);
-		text.text = "";
+		alertText.text = "";
 		message.text = "";
 	}
 
@@ -52,8 +53,9 @@ public class DonationAlert : Alert
 			}
 		}
 
-		text.text = top[0] + "just donated " + top[1].Replace(")", "");
+		alertText.text = top[0] + "just donated " + top[1].Replace(")", "");
 		message.text = entries[1];
+		SetLayoutText(entries[0]);
 		StartCoroutine(VoiceCoroutine(entries[1], sound.length));
 	}
 

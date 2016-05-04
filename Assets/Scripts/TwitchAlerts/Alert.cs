@@ -4,13 +4,18 @@ using System.Collections.Generic;
 
 public abstract class Alert : MonoBehaviour
 {
-	public TextMesh text;	
-	public float duration = 3f;	
+	public TextMesh layoutText;
 
+	[Header("Alert")]
+	public TextMesh alertText;
+	public float duration = 3f;
+
+	[Header("Sound")]
 	public AudioClip sound;
 
 	public AudioSource audioSource;
 
+	[Header("Particles")]
 	public ParticleSystem particleSystem;
 	public float particlesDuration;
 
@@ -21,7 +26,7 @@ public abstract class Alert : MonoBehaviour
 	protected virtual void Start()
 	{
 		Messenger.AddListener<string>(Type().ToString(), OnAlert);
-		text.text = "";
+		alertText.text = "";
 	}
 
 	void OnAlert(string data)
@@ -53,6 +58,7 @@ public abstract class Alert : MonoBehaviour
 	protected virtual IEnumerator ProcessAlert(string data)
 	{
 		alertInProgress = true;
+		SetLayoutText(data);
 		StartCoroutine(ParticleCoroutine());
 		if (sound && audioSource)
 		{
@@ -60,12 +66,61 @@ public abstract class Alert : MonoBehaviour
 		}
 		SetContent(data);
 		yield return new WaitForSeconds(duration);
-		text.text = "";
+		alertText.text = "";
 		yield return new WaitForSeconds(1);
 		alertInProgress = false;
+	}
+
+	protected void SetLayoutText(string message)
+	{
+		SetLayoutText(layoutText, message);
+	}
+
+	protected void SetLayoutText(TextMesh textMesh, string message)
+	{
+		if (textMesh == null) return;
+
+		RotateLayoutText(textMesh, message);
+	}
+
+	void RotateLayoutText(TextMesh textMesh, string message)
+	{
+		iTween.RotateBy(textMesh.gameObject, new Hashtable()
+		{
+			{ "x", 0.25f },
+			{ "time", 1 },
+			{ "easetype", iTween.EaseType.easeInQuad },
+			{ "oncomplete", "RotateLayoutText2" },
+			{ "oncompleteparams", new LayoutTextParams()
+			{
+				text = textMesh,
+				message = message
+			} },
+			{ "oncompletetarget", gameObject }
+		});
+	}
+
+	void RotateLayoutText2(LayoutTextParams args)
+	{
+		args.text.text = args.message;
+		args.text.transform.rotation = Quaternion.Euler(-90, 0, 0);
+		iTween.RotateBy(args.text.gameObject, new Hashtable()
+		{
+			{ "x", 0.25f },
+			{ "time", 1 },
+			{ "easetype", iTween.EaseType.easeOutQuad },
+			{ "oncomplete", "FinishRotate" },
+			{ "oncompletetarget", gameObject }
+		});
 	}
 
 	protected abstract void SetContent(string data);
 
 	protected abstract TwitchAlertsType Type();
+
+	class LayoutTextParams
+	{
+		public TextMesh text;
+		public string message;
+	}
 }

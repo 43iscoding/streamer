@@ -1,5 +1,6 @@
 ﻿public enum TwitchAlertsType
 {	
+	//TwitchAlerts
 	thirty_day_donation_amount,
 	thirty_day_top_donator,
 	thirty_day_top_donators,
@@ -39,5 +40,9 @@
 	total_subscriber_count,
 	weekly_donation_amount,
 	weekly_top_donator,
-	weekly_top_donators
+	weekly_top_donators,
+
+	//DeepBot
+	YoutubeCurrentSong,
+	YoutubeCurrentSongRequestedBy,
 }

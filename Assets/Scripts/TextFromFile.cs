@@ -6,11 +6,14 @@ using System.Text;
 public class TextFromFile : MonoBehaviour
 {
 	public TextMesh text;
+	public string prepend = "";
+	public string append = "";
 
 	public TwitchAlertsType type;
 
-	private string pathBase = "C:\\Users\\User\\Desktop\\Twitch Alerts\\";
-	private string extention = ".txt";
+	private string twitchAlertsPath = "C:\\Users\\User\\Desktop\\Twitch Alerts\\";
+	private string deepBotPath = "D:\\Software\\Deepbot\\obs\\";
+	private string extension = ".txt";
 
 	public static readonly string DELIMETER = " %DELIMETER% ";
 
@@ -23,7 +26,14 @@ public class TextFromFile : MonoBehaviour
 	{
 		get
 		{
-			return pathBase + type.ToString().Replace("thirty_", "30") + extention;
+			if (type.IsDeepBot())
+			{
+				return deepBotPath + type + extension;
+			}
+			else
+			{
+				return twitchAlertsPath + type.ToString().Replace("thirty_", "30") + extension;
+			}
 		}
 	}
 
@@ -46,8 +56,6 @@ public class TextFromFile : MonoBehaviour
 
 	void ReadFile()
 	{
-		if (text == null) return;
-
 		lastUpdated = Time.realtimeSinceStartup;
 		try
 		{
@@ -55,13 +63,16 @@ public class TextFromFile : MonoBehaviour
 			using (reader)
 			{
 				string line = reader.ReadLine();
-				text.text = PostProcess(line);
+				if (text != null)
+				{
+					text.text = PostProcess(line);
+				}
 				if (lastValue != null && lastValue != line)
 				{
 					//Broadcast change
 					if (Messenger.eventTable.ContainsKey(type.ToString()))
 					{
-						Messenger.Broadcast(type.ToString(), line);	
+						Messenger.Broadcast(type.ToString(), prepend + line + append);	
 					}
 				}
 				lastValue = line;
@@ -74,15 +85,15 @@ public class TextFromFile : MonoBehaviour
 		}
 	}
 
-	string PostProcess(string text)
+	string PostProcess(string message)
 	{
-		if (text == null) return null;
+		if (message == null) return null;
 
-		text = text.Replace("â‚¬", ""); //Get rid of EUR sign
-		if (text.Contains(DELIMETER))
+		message = message.Replace("â‚¬", ""); //Get rid of EUR sign
+		if (message.Contains(DELIMETER))
 		{
-			return text.Split(new [] { DELIMETER }, StringSplitOptions.None)[0];
+			return message.Split(new [] { DELIMETER }, StringSplitOptions.None)[0];
 		}
-		return text;
-	}
+		return prepend + message + append;
+	}	
 }
