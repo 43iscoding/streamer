@@ -1,4 +1,6 @@
-﻿public static class Extensions
+﻿using UnityEngine;
+
+public static class Extensions
 {
 	public static bool IsDeepBot(this TwitchAlertsType type)
 	{
@@ -9,6 +11,18 @@
 				return true;
 			default:
 				return false;
+		}
+	}
+
+	public static AnimationProcessor AddProcessor(this AnimationType type, GameObject gameObject)
+	{
+		switch (type)
+		{
+			case AnimationType.FlipHorizontal:
+			case AnimationType.FlipVertical:
+				return gameObject.AddComponent<AnimationFlipVertical>();
+			default:
+				return gameObject.AddComponent<AnimationNone>();
 		}
 	}
 }

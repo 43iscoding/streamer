@@ -93,6 +93,10 @@
     <Compile Include="Assets\Scripts\TextFromFile.cs" />
     <Compile Include="Assets\Scripts\TextMeshWrapper.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\Alert.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\Animations\AnimationFlipVertical.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\Animations\AnimationNone.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\Animations\AnimationProcessor.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\Animations\AnimationType.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\DonationAlert.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\FollowerAlert.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\SocialController.cs" />

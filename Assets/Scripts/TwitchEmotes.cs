@@ -15,9 +15,10 @@ public class TwitchEmotes : MonoBehaviour
 			instance = this;
 			DontDestroyOnLoad(gameObject);
 		}
+		InitEmotes();
 	}
 
-	void Start()
+	void InitEmotes()
 	{
 		emotes = new Dictionary<string, Vector2>
 		{

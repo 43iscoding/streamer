@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public abstract class Alert : MonoBehaviour
 {
-	public TextMesh layoutText;
+	public TextMeshWrapper layoutText;
 
 	[Header("Alert")]
 	public TextMesh alertText;
@@ -33,7 +33,7 @@ public abstract class Alert : MonoBehaviour
 	{
 		if (init)
 		{
-			SetLayoutText(data, true);
+			SetLayoutText(data);
 			return;
 		}
 		queue.Enqueue(data);
@@ -63,7 +63,7 @@ public abstract class Alert : MonoBehaviour
 	protected virtual IEnumerator ProcessAlert(string data)
 	{
 		alertInProgress = true;
-		SetLayoutText(data, false);
+		SetLayoutText(data);
 		StartCoroutine(ParticleCoroutine());
 		if (sound && audioSource)
 		{
@@ -76,54 +76,15 @@ public abstract class Alert : MonoBehaviour
 		alertInProgress = false;
 	}
 
-	protected virtual void SetLayoutText(string message, bool instant)
+	protected virtual void SetLayoutText(string message)
 	{
-		SetLayoutText(layoutText, message, instant);
+		SetLayoutText(layoutText, message);
 	}
 
-	protected void SetLayoutText(TextMesh textMesh, string message, bool instant)
+	protected void SetLayoutText(TextMeshWrapper textMesh, string message)
 	{
 		if (textMesh == null) return;
-
-		if (instant)
-		{
-			textMesh.text = message;
-		}
-		else
-		{
-			RotateLayoutText(textMesh, message);
-		}
-	}
-
-	void RotateLayoutText(TextMesh textMesh, string message)
-	{
-		iTween.RotateBy(textMesh.gameObject, new Hashtable()
-		{
-			{ "x", 0.25f },
-			{ "time", 1 },
-			{ "easetype", iTween.EaseType.easeInQuad },
-			{ "oncomplete", "RotateLayoutText2" },
-			{ "oncompleteparams", new LayoutTextParams()
-			{
-				text = textMesh,
-				message = message
-			} },
-			{ "oncompletetarget", gameObject }
-		});
-	}
-
-	void RotateLayoutText2(LayoutTextParams args)
-	{
-		args.text.text = args.message;
-		args.text.transform.rotation = Quaternion.Euler(-90, 0, 0);
-		iTween.RotateBy(args.text.gameObject, new Hashtable()
-		{
-			{ "x", 0.25f },
-			{ "time", 1 },
-			{ "easetype", iTween.EaseType.easeOutQuad },
-			{ "oncomplete", "FinishRotate" },
-			{ "oncompletetarget", gameObject }
-		});
+		textMesh.text = message;
 	}
 
 	protected abstract void SetContent(string data);
@@ -132,7 +93,7 @@ public abstract class Alert : MonoBehaviour
 
 	class LayoutTextParams
 	{
-		public TextMesh text;
+		public TextMeshWrapper text;
 		public string message;
 	}
 }

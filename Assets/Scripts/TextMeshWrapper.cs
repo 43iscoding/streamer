@@ -4,29 +4,38 @@
 public class TextMeshWrapper : MonoBehaviour
 {
 	private TextMesh textMesh;
-	public int charsPerLine = 80; 
+	public int charsPerLine = 80;
+
+	public AnimationType animation = AnimationType.None;
+	private AnimationProcessor animationProcessor;
 
 	// Use this for initialization
 	void Start ()
 	{
 		textMesh = GetComponent<TextMesh>();
+		animationProcessor = animation.AddProcessor(gameObject);
 	}
 
 	public string text
 	{
 		get { return textMesh.text; }
-		//TODO: Animated text change
-		set { ProcessEmoticons(value); }
-	}	
+		set { SetText(ProcessEmoticons(value)); }
+	}
 
-	private void ProcessEmoticons(string text)
+	void SetText(string message)
 	{
 		if (textMesh == null) return;
 
-		if (text == "")
+		animationProcessor.Animate(textMesh, message);
+	}
+
+	private string ProcessEmoticons(string text)
+	{
+		if (textMesh == null) return "";
+
+		if (string.IsNullOrEmpty(text))
 		{
-			textMesh.text = "";
-			return;
+			return "";
 		}
 
 		string result = "";
@@ -52,6 +61,6 @@ public class TextMeshWrapper : MonoBehaviour
 			}
 		}
 
-		textMesh.text = result;
+		return result;
 	}
 }
