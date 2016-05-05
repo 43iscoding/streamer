@@ -56,18 +56,18 @@ public class TextFromFile : MonoBehaviour
 	{
 		lastUpdated = Time.realtimeSinceStartup;
 		string line = ReadFile(GetFilePath(type));
-
-		if (text != null)
-		{
-			text.text = PostProcess(line);
-		}
-		if (textWrapper != null)
-		{
-			textWrapper.text = PostProcess(line);
-		}
-
 		if (lastValue != line)
 		{
+			if (text != null)
+			{
+				text.text = PostProcess(line);
+			}
+			if (textWrapper != null)
+			{
+
+				textWrapper.text = PostProcess(line);
+			}
+
 			//Broadcast change
 			if (Messenger.eventTable.ContainsKey(type.ToString()))
 			{

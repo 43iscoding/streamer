@@ -9,8 +9,7 @@ public class TextMeshWrapper : MonoBehaviour
 	public AnimationType animation = AnimationType.None;
 	private AnimationProcessor animationProcessor;
 
-	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		textMesh = GetComponent<TextMesh>();
 		animationProcessor = animation.AddProcessor(gameObject);
