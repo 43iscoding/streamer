@@ -97,9 +97,31 @@ public class TextFromFile : MonoBehaviour
 		}
 	}
 
+	private static void WriteFile(string filePath, string value)
+	{
+		try
+		{
+			StreamWriter writer = new StreamWriter(filePath);
+			using (writer)
+			{
+				writer.WriteLine(value);
+			}
+			writer.Close();
+		}
+		catch (Exception e)
+		{
+			Debug.LogError(e);
+		}
+	}
+
 	public static string ReadOnce(TwitchAlertsType type)
 	{
 		return ReadFile(GetFilePath(type));
+	}
+
+	public static void WriteOnce(TwitchAlertsType type, string value)
+	{
+		WriteFile(GetFilePath(type), value);
 	}
 
 	string PostProcess(string message)

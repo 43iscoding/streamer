@@ -31,20 +31,11 @@ public class TwitchAlertsTest : MonoBehaviour
 
 	private void FakeDonation()
 	{
-		string path = pathBase + TwitchAlertsType.most_recent_donator + extention;
-		try
-		{
-			StreamWriter writer = new StreamWriter(path);
-			using (writer)
-			{
-				writer.WriteLine("TestUser" + Random.Range(1, 999) + " ($" + Random.Range(1,100) + ".00)" + TextFromFile.DELIMETER + RandomDonationMessage());				
-			}
-			writer.Close();
-		}
-		catch (Exception e)
-		{
-			Debug.LogError(e);
-		}
+		string testUser = "TestUser" + Random.Range(1, 999);
+		int money = Random.Range(1, 100);
+		string amount = "($" + money + ".00)";
+		string message = testUser + " " + amount + TextFromFile.DELIMETER + RandomDonationMessage();
+		TextFromFile.WriteOnce(TwitchAlertsType.most_recent_donator, message);
 	}
 
 	private List<string> messages = new List<string>()
@@ -64,21 +55,9 @@ public class TwitchAlertsTest : MonoBehaviour
 
 	private void FakeFollow()
 	{
-		string path = pathBase + TwitchAlertsType.most_recent_follower + extention;
-		string countPath = pathBase + TwitchAlertsType.session_follower_count + extention;
-
-		try
-		{
-			StreamWriter writer = new StreamWriter(path);
-			using (writer)
-			{
-				writer.WriteLine("TestUser" + Random.Range(1, 999));
-			}
-			writer.Close();
-		}
-		catch (Exception e)
-		{
-			Debug.LogError(e);
-		}
+		string testUser = "TestUser" + Random.Range(1, 999);
+		int followers = int.Parse(TextFromFile.ReadOnce(TwitchAlertsType.session_follower_count));
+		TextFromFile.WriteOnce(TwitchAlertsType.most_recent_follower, testUser);
+		TextFromFile.WriteOnce(TwitchAlertsType.session_follower_count, (followers + 1).ToString());
 	}
 }

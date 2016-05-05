@@ -5,16 +5,20 @@ public class FollowerAlert : Alert
 	[Header("Follower")]
 	public TextMeshWrapper followerCount;
 
+	private int followers;
+
 	protected override void Start()
 	{
 		base.Start();
-		followerCount.text = TextFromFile.ReadOnce(TwitchAlertsType.session_follower_count);
+		followers = int.Parse(TextFromFile.ReadOnce(TwitchAlertsType.session_follower_count));
+		followerCount.text = followers.ToString();
 	}
 
 	protected override void SetContent(string data)
 	{
 		alertText.text = data + " just followed!";
-		followerCount.text = TextFromFile.ReadOnce(TwitchAlertsType.session_follower_count);
+		followers++;
+		followerCount.text = followers.ToString();
 	}
 
 	protected override TwitchAlertsType Type()
