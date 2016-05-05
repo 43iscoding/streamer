@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class FollowerAlert : Alert
 {
@@ -16,7 +17,8 @@ public class FollowerAlert : Alert
 
 	protected override void SetContent(string data)
 	{
-		alertText.text = data + " just followed!";
+		//alertText.text = data + " just followed!";
+		alertText.text = data;
 		followers++;
 		followerCount.text = followers.ToString();
 	}
@@ -24,5 +26,12 @@ public class FollowerAlert : Alert
 	protected override TwitchAlertsType Type()
 	{
 		return TwitchAlertsType.most_recent_follower;
+	}
+
+	protected override IEnumerator ParticleCoroutine()
+	{
+		if (particleSystem == null) yield break;
+
+		particleSystem.Emit(1);
 	}
 }

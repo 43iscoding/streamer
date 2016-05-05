@@ -8,6 +8,7 @@ public abstract class Alert : MonoBehaviour
 
 	[Header("Alert")]
 	public TextMesh alertText;
+	public SpriteRenderer sprite;
 	public float duration = 3f;
 
 	[Header("Sound")]
@@ -26,6 +27,10 @@ public abstract class Alert : MonoBehaviour
 	protected virtual void Start()
 	{
 		Messenger.AddListener<string, bool>(Type().ToString(), OnAlert);
+		if (sprite)
+		{
+			sprite.enabled = false;
+		}
 		alertText.text = "";
 	}
 
@@ -49,7 +54,7 @@ public abstract class Alert : MonoBehaviour
 		}
 	}
 
-	protected IEnumerator ParticleCoroutine()
+	protected virtual IEnumerator ParticleCoroutine()
 	{
 		if (!particleSystem) yield break;
 
@@ -63,6 +68,10 @@ public abstract class Alert : MonoBehaviour
 	protected virtual IEnumerator ProcessAlert(string data)
 	{
 		alertInProgress = true;
+		if (sprite)
+		{
+			sprite.enabled = true;
+		}
 		SetLayoutText(data);
 		StartCoroutine(ParticleCoroutine());
 		if (sound && audioSource)
@@ -72,8 +81,12 @@ public abstract class Alert : MonoBehaviour
 		SetContent(data);
 		yield return new WaitForSeconds(duration);
 		alertText.text = "";
-		yield return new WaitForSeconds(1);
 		alertInProgress = false;
+		if (sprite)
+		{
+			sprite.enabled = false;
+		}
+		yield return new WaitForSeconds(1);
 	}
 
 	protected virtual void SetLayoutText(string message)
