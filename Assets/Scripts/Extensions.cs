@@ -19,6 +19,7 @@ public static class Extensions
 		switch (type)
 		{
 			case AnimationType.FlipHorizontal:
+				return gameObject.AddComponent<AnimationFlipHorizontal>();
 			case AnimationType.FlipVertical:
 				return gameObject.AddComponent<AnimationFlipVertical>();
 			default:

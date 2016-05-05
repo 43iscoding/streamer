@@ -6,14 +6,15 @@ using System.Text;
 public class TextFromFile : MonoBehaviour
 {
 	public TextMesh text;
+	public TextMeshWrapper textWrapper;
 	public string prepend = "";
 	public string append = "";
 
 	public TwitchAlertsType type;
 
-	private string twitchAlertsPath = "C:\\Users\\User\\Desktop\\Twitch Alerts\\";
-	private string deepBotPath = "D:\\Software\\Deepbot\\obs\\";
-	private string extension = ".txt";
+	private static string twitchAlertsPath = "C:\\Users\\User\\Desktop\\Twitch Alerts\\";
+	private static string deepBotPath = "D:\\Software\\Deepbot\\obs\\";
+	private static string extension = ".txt";
 
 	public static readonly string DELIMETER = " %DELIMETER% ";
 
@@ -22,25 +23,22 @@ public class TextFromFile : MonoBehaviour
 	private float lastUpdated;
 	private string lastValue = null;
 
-	private string FilePath
+	static string GetFilePath(TwitchAlertsType type)
 	{
-		get
+		if (type.IsDeepBot())
 		{
-			if (type.IsDeepBot())
-			{
-				return deepBotPath + type + extension;
-			}
-			else
-			{
-				return twitchAlertsPath + type.ToString().Replace("thirty_", "30") + extension;
-			}
+			return deepBotPath + type + extension;
+		}
+		else
+		{
+			return twitchAlertsPath + type.ToString().Replace("thirty_", "30") + extension;
 		}
 	}
 
 	// Use this for initialization
 	void Start ()
 	{
-		ReadFile();
+		Process();
 	}
 	
 	// Update is called once per frame
@@ -50,39 +48,58 @@ public class TextFromFile : MonoBehaviour
 
 		if (Time.realtimeSinceStartup - lastUpdated > updateFrequency)
 		{
-			ReadFile();
+			Process();
 		}
 	}
 
-	void ReadFile()
+	void Process()
 	{
 		lastUpdated = Time.realtimeSinceStartup;
+		string line = ReadFile(GetFilePath(type));
+
+		if (text != null)
+		{
+			text.text = PostProcess(line);
+		}
+		if (textWrapper != null)
+		{
+			textWrapper.text = PostProcess(line);
+		}
+
+		if (lastValue != line)
+		{
+			//Broadcast change
+			if (Messenger.eventTable.ContainsKey(type.ToString()))
+			{
+				Messenger.Broadcast(type.ToString(), prepend + line + append, lastValue == null);
+			}
+		}
+		lastValue = line;
+	}
+
+	static string ReadFile(string filePath)
+	{
 		try
 		{
-			StreamReader reader = new StreamReader(FilePath, Encoding.Default);
+			StreamReader reader = new StreamReader(filePath, Encoding.Default);
+			string line;
 			using (reader)
 			{
-				string line = reader.ReadLine();
-				if (text != null)
-				{
-					text.text = PostProcess(line);
-				}
-				if (lastValue != line)
-				{
-					//Broadcast change
-					if (Messenger.eventTable.ContainsKey(type.ToString()))
-					{
-						Messenger.Broadcast(type.ToString(), prepend + line + append, lastValue == null);
-					}
-				}
-				lastValue = line;
+				line = reader.ReadLine();
 			}
 			reader.Close();
+			return line;
 		}
 		catch (Exception e)
 		{
 			Debug.LogError(e);
+			return "<ERROR>";
 		}
+	}
+
+	public static string ReadOnce(TwitchAlertsType type)
+	{
+		return ReadFile(GetFilePath(type));
 	}
 
 	string PostProcess(string message)
