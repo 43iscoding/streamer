@@ -61,6 +61,9 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>Assets\Plugins\System.Drawing.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="streamer.CSharp.Plugins.csproj">
@@ -71,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ComponentToggle.cs" />
     <Compile Include="Assets\Scripts\Extensions.cs" />
+    <Compile Include="Assets\Scripts\GIF.cs" />
     <Compile Include="Assets\Scripts\HueShift.cs" />
     <Compile Include="Assets\Scripts\Kino\Glitch\AnalogGlitch.cs" />
     <Compile Include="Assets\Scripts\Kino\Glitch\DigitalGlitch.cs" />
