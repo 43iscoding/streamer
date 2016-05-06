@@ -22,36 +22,13 @@ public abstract class Alert : MonoBehaviour
 
 	private Queue<string> queue = new Queue<string>();
 
-	protected static bool alertInProgress;
-
 	protected virtual void Start()
 	{
-		Messenger.AddListener<string, bool>(Type().ToString(), OnAlert);
 		if (sprite)
 		{
 			sprite.enabled = false;
 		}
 		alertText.text = "";
-	}
-
-	void OnAlert(string data, bool init)
-	{
-		if (init)
-		{
-			SetLayoutText(data);
-			return;
-		}
-		queue.Enqueue(data);
-	}
-
-	void Update()
-	{
-		if (queue.Count > 0)
-		{
-			if (alertInProgress) return;
-
-			StartCoroutine(ProcessAlert(queue.Dequeue()));
-		}
 	}
 
 	protected virtual IEnumerator ParticleCoroutine()
@@ -65,9 +42,14 @@ public abstract class Alert : MonoBehaviour
 		particleSystem.Stop();
 	}
 
+	public void Process(string data)
+	{
+		StartCoroutine(ProcessAlert(data));
+	}
+
 	protected virtual IEnumerator ProcessAlert(string data)
 	{
-		alertInProgress = true;
+		AlertManager.alertInProgress = true;
 		if (sprite)
 		{
 			sprite.enabled = true;
@@ -81,12 +63,12 @@ public abstract class Alert : MonoBehaviour
 		SetContent(data);
 		yield return new WaitForSeconds(duration);
 		alertText.text = "";
-		alertInProgress = false;
 		if (sprite)
 		{
 			sprite.enabled = false;
 		}
 		yield return new WaitForSeconds(1);
+		AlertManager.alertInProgress = false;
 	}
 
 	protected virtual void SetLayoutText(string message)

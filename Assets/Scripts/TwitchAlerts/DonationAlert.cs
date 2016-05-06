@@ -20,7 +20,7 @@ public class DonationAlert : Alert
 
 	protected override IEnumerator ProcessAlert(string data)
 	{
-		alertInProgress = true;
+		AlertManager.alertInProgress = true;
 		if (sound && audioSource)
 		{
 			audioSource.PlayOneShot(sound);
@@ -72,7 +72,7 @@ public class DonationAlert : Alert
 
 		WindowsVoice.theVoice.Speak(toSpeak);
 		yield return new WaitForSeconds(EstimateDuration(toSpeak) + 1);
-		alertInProgress = false;
+		AlertManager.alertInProgress = false;
 	}
 
 	float EstimateDuration(string toSpeak)
