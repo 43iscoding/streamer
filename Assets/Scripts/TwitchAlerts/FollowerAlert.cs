@@ -15,10 +15,10 @@ public class FollowerAlert : Alert
 		followerCount.text = followers.ToString();
 	}
 
-	protected override void SetContent(string data)
+	protected override void SetContent(AlertData data)
 	{
-		//alertText.text = data + " just followed!";
-		alertText.text = data;
+		//alertText.text = data.username + " just followed!";
+		alertText.text = data.username;
 		followers++;
 		followerCount.text = followers.ToString();
 	}

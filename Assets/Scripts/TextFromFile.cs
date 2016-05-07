@@ -71,7 +71,7 @@ public class TextFromFile : MonoBehaviour
 			//Broadcast change
 			if (Messenger.eventTable.ContainsKey(type.ToString()))
 			{
-				Messenger.Broadcast(type.ToString(), prepend + line + append, lastValue == null);
+				Messenger.Broadcast(type.ToString(), AlertData.Parse(type, prepend + line + append), lastValue == null);
 			}
 		}
 		lastValue = line;

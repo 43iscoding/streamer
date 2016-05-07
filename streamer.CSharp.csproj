@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\TextFromFile.cs" />
     <Compile Include="Assets\Scripts\TextMeshWrapper.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\Alert.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\AlertData.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\AlertManager.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\Animations\AnimationFlip.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\Animations\AnimationFlipHorizontal.cs" />

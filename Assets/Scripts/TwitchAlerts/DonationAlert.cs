@@ -7,7 +7,6 @@ public class DonationAlert : Alert
 {
 	[Header("Donation")]
 	public TextMeshWrapper message;
-
 	private float averageWordsPerSecond = 2.166f;
 
 	public ParticleIntensityTune particlesTuning;
@@ -18,7 +17,7 @@ public class DonationAlert : Alert
 		message.text = "";
 	}
 
-	protected override IEnumerator ProcessAlert(string data)
+	protected override IEnumerator ProcessAlert(AlertData data)
 	{
 		AlertManager.alertInProgress = true;
 		if (sound && audioSource)
@@ -34,19 +33,14 @@ public class DonationAlert : Alert
 		message.text = "";
 	}
 
-	protected override void SetContent(string data)
+	protected override void SetContent(AlertData data)
 	{
-		string[] entries = data.Split(new[] { TextFromFile.DELIMETER }, StringSplitOptions.None);
-
-		string[] top = entries[0].Split('(');
-
+		DonationAlertData donationData = data as DonationAlertData;
 		if (particlesTuning)
 		{
-			string value = new string(top[1].Where(c => char.IsDigit(c) || c == '.').ToArray());
-			float rate;
-			if (float.TryParse(value, out rate))
+			if (donationData.amount > 0)
 			{
-				particlesTuning.SetRate(rate);
+				particlesTuning.SetRate(donationData.amount);
 			}
 			else
 			{
@@ -54,15 +48,15 @@ public class DonationAlert : Alert
 			}
 		}
 
-		alertText.text = top[0] + "just donated " + top[1].Replace(")", "");
-		message.text = entries[1];
-		StartCoroutine(VoiceCoroutine(entries[1], sound.length));
+		alertText.text = donationData.username + " just donated " + donationData.amountFormatted;
+		message.text = donationData.message;
+		StartCoroutine(VoiceCoroutine(donationData.message, sound.length));
 	}
 
-	protected override void SetLayoutText(string message)
+	protected override void SetLayoutText(AlertData data)
 	{
-		message = message.Split(new[] { TextFromFile.DELIMETER }, StringSplitOptions.None)[0];
-		message = message.Replace("â‚¬", ""); //Get rid of EUR sign
+		DonationAlertData donationData = data as DonationAlertData;
+		string message = string.Format("{0} ({1})", donationData.username, donationData.amountFormatted);
 		SetLayoutText(layoutText, message);
 	}
 

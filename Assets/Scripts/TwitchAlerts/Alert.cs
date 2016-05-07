@@ -42,12 +42,12 @@ public abstract class Alert : MonoBehaviour
 		particleSystem.Stop();
 	}
 
-	public void Process(string data)
+	public void Process(AlertData data)
 	{
 		StartCoroutine(ProcessAlert(data));
 	}
 
-	protected virtual IEnumerator ProcessAlert(string data)
+	protected virtual IEnumerator ProcessAlert(AlertData data)
 	{
 		AlertManager.alertInProgress = true;
 		if (sprite)
@@ -71,9 +71,9 @@ public abstract class Alert : MonoBehaviour
 		AlertManager.alertInProgress = false;
 	}
 
-	protected virtual void SetLayoutText(string message)
+	protected virtual void SetLayoutText(AlertData data)
 	{
-		SetLayoutText(layoutText, message);
+		SetLayoutText(layoutText, data.username);
 	}
 
 	protected void SetLayoutText(TextMeshWrapper textMesh, string message)
@@ -82,7 +82,7 @@ public abstract class Alert : MonoBehaviour
 		textMesh.text = message;
 	}
 
-	protected abstract void SetContent(string data);
+	protected abstract void SetContent(AlertData data);
 
 	protected abstract TwitchAlertsType Type();
 

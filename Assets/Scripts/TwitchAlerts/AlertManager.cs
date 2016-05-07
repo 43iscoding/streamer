@@ -3,13 +3,6 @@ using UnityEngine;
 
 public class AlertManager : MonoBehaviour
 {
-
-	class AlertData
-	{
-		public TwitchAlertsType type;
-		public string data;
-	}
-
 	private Queue<AlertData> queue = new Queue<AlertData>();
 
 	public FollowerAlert[] followerAlerts;
@@ -20,11 +13,11 @@ public class AlertManager : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		Messenger.AddListener<string, bool>(TwitchAlertsType.most_recent_follower.ToString(), OnFollowerAlert);
-		Messenger.AddListener<string, bool>(TwitchAlertsType.most_recent_donator.ToString(), OnDonationAlert);
+		Messenger.AddListener<AlertData, bool>(TwitchAlertsType.most_recent_follower.ToString(), OnFollowerAlert);
+		Messenger.AddListener<AlertData, bool>(TwitchAlertsType.most_recent_donator.ToString(), OnDonationAlert);
 	}
 
-	void OnDonationAlert(string data, bool init)
+	void OnDonationAlert(AlertData data, bool init)
 	{
 		if (init)
 		{
@@ -32,14 +25,10 @@ public class AlertManager : MonoBehaviour
 			return;
 		}
 
-		queue.Enqueue(new AlertData()
-		{
-			type = TwitchAlertsType.most_recent_donator,
-			data = data
-		});
+		queue.Enqueue(data);
 	}
 
-	void OnFollowerAlert(string data, bool init)
+	void OnFollowerAlert(AlertData data, bool init)
 	{
 		if (init)
 		{
@@ -47,11 +36,7 @@ public class AlertManager : MonoBehaviour
 			return;
 		}
 
-		queue.Enqueue(new AlertData()
-		{
-			type = TwitchAlertsType.most_recent_follower,
-			data = data
-		});
+		queue.Enqueue(data);
 	}
 
 	void Update()
@@ -64,11 +49,11 @@ public class AlertManager : MonoBehaviour
 			Alert processor = GetProcessor(data);
 			if (processor == null)
 			{
-				Debug.LogError("No processor found for " + data.type + " | " + data.data);
+				Debug.LogError("No processor found for " + data.type + " | " + data.username);
 				return;
 			}
 
-			processor.Process(data.data);
+			processor.Process(data);
 		}
 	}
 
@@ -77,20 +62,21 @@ public class AlertManager : MonoBehaviour
 		switch (data.type)
 		{
 			case TwitchAlertsType.most_recent_donator:
-				return GetDonationAlertProcessor(data.data);
+				DonationAlertData donationData = data as DonationAlertData;
+				return GetDonationAlertProcessor(donationData.amount);
 			case TwitchAlertsType.most_recent_follower:
-				return GetFollowerAlertProcessor(data.data);
+				return GetFollowerAlertProcessor();
 			default:
 				return null;
 		}
 	}
 
-	FollowerAlert GetFollowerAlertProcessor(string data)
+	FollowerAlert GetFollowerAlertProcessor()
 	{
 		return followerAlerts[0];
 	}
 
-	DonationAlert GetDonationAlertProcessor(string data)
+	DonationAlert GetDonationAlertProcessor(float amount)
 	{
 		return donationsAlerts[0];
 	}
