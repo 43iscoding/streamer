@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AlertManager : MonoBehaviour
@@ -78,6 +79,13 @@ public class AlertManager : MonoBehaviour
 
 	DonationAlert GetDonationAlertProcessor(float amount)
 	{
-		return donationsAlerts[0];
+		DonationAlert[] candidates = donationsAlerts.Where(alert => alert.Matches(amount)).ToArray();
+
+		if (candidates.Length == 0)
+		{
+			return donationsAlerts[Random.Range(0, donationsAlerts.Length)];
+		}
+
+		return candidates[Random.Range(0, candidates.Length)];
 	}
 }

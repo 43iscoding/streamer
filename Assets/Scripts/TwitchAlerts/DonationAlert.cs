@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class DonationAlert : Alert
 {
-	[Header("Donation")]
-	public TextMeshWrapper message;
 	private float averageWordsPerSecond = 2.166f;
 
+	[Header("Donation")]
+	public TextMeshWrapper message;
 	public ParticleIntensityTune particlesTuning;
+	public float[] amountToTrigger;
+
+	public bool Matches(float amount)
+	{
+		if (amountToTrigger == null) return true;
+
+		return amountToTrigger.Any(trigger => trigger == amount);
+	}
 
 	protected override void Start()
 	{

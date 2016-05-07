@@ -35,7 +35,7 @@ public class TwitchAlertsTest : MonoBehaviour
 
 	private List<string> messages = new List<string>()
 	{
-		"Nice stream bro! Kappa Please play Darude Sandstorm dududu dududu dududu dududu dududu dududu"
+		"Nice stream bro! Kappa Keepo KappaPride"
 	};
 
 	private string RandomDonationMessage(int emotes = 0)
