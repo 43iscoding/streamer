@@ -27,7 +27,7 @@ public class TwitchAlertsTest : MonoBehaviour
 	private void FakeDonation()
 	{
 		string testUser = "TestUser" + Random.Range(1, 999);
-		int money = Random.Range(1, 100);
+		int money = 2 * Random.Range(1, 70);
 		string amount = "($" + money + ".00)";
 		string message = testUser + " " + amount + TextFromFile.DELIMETER + RandomDonationMessage();
 		TextFromFile.WriteOnce(TwitchAlertsType.most_recent_donator, message);
@@ -35,7 +35,7 @@ public class TwitchAlertsTest : MonoBehaviour
 
 	private List<string> messages = new List<string>()
 	{
-		"Nice stream bro! Kappa Keepo KappaPride"
+		"Nice stream bro Kappa"
 	};
 
 	private string RandomDonationMessage(int emotes = 0)

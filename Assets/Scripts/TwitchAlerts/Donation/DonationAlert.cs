@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -10,19 +9,21 @@ public class DonationAlert : Alert
 	[Header("Donation")]
 	public TextMeshWrapper message;
 	public ParticleIntensityTune particlesTuning;
-	public float[] amountToTrigger;
+
+	private DonationAmountFilter[] filters;
 
 	public bool Matches(float amount)
 	{
-		if (amountToTrigger == null) return true;
+		if (filters == null || filters.Length == 0) return false;
 
-		return amountToTrigger.Any(trigger => trigger == amount);
+		return filters.Any(filter => filter.Matches(amount));
 	}
 
 	protected override void Start()
 	{
 		base.Start();
 		message.text = "";
+		filters = GetComponents<DonationAmountFilter>();
 	}
 
 	protected override IEnumerator ProcessAlert(AlertData data)

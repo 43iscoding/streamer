@@ -25,6 +25,7 @@ public class AlertManager : MonoBehaviour
 			//SetLayoutText(data);
 			return;
 		}
+		Debug.Log("Donation Alert: " + data.username + " | " + ((DonationAlertData) data).amountFormatted);
 
 		queue.Enqueue(data);
 	}
@@ -36,6 +37,7 @@ public class AlertManager : MonoBehaviour
 			//SetLayoutText(data);
 			return;
 		}
+		Debug.Log("Follower Alert: " + data.username);
 
 		queue.Enqueue(data);
 	}

@@ -105,7 +105,11 @@
     <Compile Include="Assets\Scripts\TwitchAlerts\Animations\AnimationNone.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\Animations\AnimationProcessor.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\Animations\AnimationType.cs" />
-    <Compile Include="Assets\Scripts\TwitchAlerts\DonationAlert.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\Donation\DonationAlert.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\Donation\DonationAmountFilter.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\Donation\DonationFilterAny.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\Donation\DonationFilterExact.cs" />
+    <Compile Include="Assets\Scripts\TwitchAlerts\Donation\DonationFilterRange.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\FollowerAlert.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\RequestsToggle.cs" />
     <Compile Include="Assets\Scripts\TwitchAlerts\SocialController.cs" />
