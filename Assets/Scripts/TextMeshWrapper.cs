@@ -60,6 +60,11 @@ public class TextMeshWrapper : MonoBehaviour
 			}
 		}
 
+		if (textMesh.GetComponent<MeshRenderer>().materials.Length > 1)
+		{
+			result += string.Format("<quad material=1 x={0} y={1} width={2} height={3} size=80/> ", 0, 0, 0.00001f, 0.00001f);
+		}
+
 		return result;
 	}
 }
