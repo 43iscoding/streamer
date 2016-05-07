@@ -66,15 +66,15 @@ public class SocialController : MonoBehaviour
 	void SetBig()
 	{
 		big = true;
-		transform.position = positionBig;
-		transform.localScale = scaleBig;
+		//transform.position = positionBig;
+		//transform.localScale = scaleBig;
 	}
 
 	void SetSmall()
 	{
 		big = false;
-		transform.position = positionSmall;
-		transform.localScale = scaleSmall;
+		//transform.position = positionSmall;
+		//transform.localScale = scaleSmall;
 	}
 
 	void Prepare()
