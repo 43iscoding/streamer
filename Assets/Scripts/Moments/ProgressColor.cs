@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ProgressColor : MonoBehaviour
 {
 	public TextMesh text;
-
-	public Color from = Color.red;
-	public Color to = Color.green;
+	public Gradient color;
 
 	public float target;
 
@@ -21,6 +18,6 @@ public class ProgressColor : MonoBehaviour
 		{
 			Debug.LogError("Could not parse " + text.text + " - not a number");
 		}
-		text.color = Color.Lerp(from, to, value / target);
+		text.color = color.Evaluate(value/target);
 	}
 }
