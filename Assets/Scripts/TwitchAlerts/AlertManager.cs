@@ -73,7 +73,7 @@ public class AlertManager : MonoBehaviour
 
 	FollowerAlert GetFollowerAlertProcessor()
 	{
-		return followerAlerts[0];
+		return followerAlerts[Random.Range(0, followerAlerts.Length)];
 	}
 
 	DonationAlert GetDonationAlertProcessor(float amount)
