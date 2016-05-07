@@ -45,8 +45,7 @@ public class SocialController : MonoBehaviour
 
 	private bool rotationOngoing;
 
-	private Dictionary<SocialType, Sprite> sprites;
-	private Dictionary<SocialType, string> strings;
+	private Dictionary<SocialType, Sprite> sprites;	
 
 	private bool big;
 
@@ -60,13 +59,6 @@ public class SocialController : MonoBehaviour
 			{SocialType.Twitter, twitter},
 			{SocialType.Instagram, instagram},
 			{SocialType.Soundcloud, soundcloud},
-		};
-		strings = new Dictionary<SocialType, string>()
-		{
-			{SocialType.Facebook, "FOLLOWXLIII"},
-			{SocialType.Twitter, "FOLLOWXLIII"},
-			{SocialType.Instagram, "FOLLOWXLIII"},
-			{SocialType.Soundcloud, "FOLLOWXLIII"},
 		};
 		SetSmall();
 	}
@@ -136,7 +128,7 @@ public class SocialController : MonoBehaviour
 	}
 
 	void Rotate2(SocialType social)
-	{		
+	{
 		sprite.sprite = sprites[social];
 		sprite.transform.rotation = Quaternion.Euler(0, -90, 0);
 		iTween.RotateBy(sprite.gameObject, new Hashtable()
@@ -146,7 +138,7 @@ public class SocialController : MonoBehaviour
 			{ "easetype", iTween.EaseType.easeOutQuad },
 			{ "oncomplete", "FinishRotate" },
 			{ "oncompletetarget", gameObject }
-		});		
+		});
 	}
 
 	void Update()

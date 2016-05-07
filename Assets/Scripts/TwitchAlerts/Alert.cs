@@ -17,10 +17,8 @@ public abstract class Alert : MonoBehaviour
 	public AudioSource audioSource;
 
 	[Header("Particles")]
-	public ParticleSystem particleSystem;
-	public float particlesDuration;
-
-	private Queue<string> queue = new Queue<string>();
+	public ParticleSystem particles;
+	public float particlesDuration;	
 
 	protected virtual void Start()
 	{
@@ -33,13 +31,13 @@ public abstract class Alert : MonoBehaviour
 
 	protected virtual IEnumerator ParticleCoroutine()
 	{
-		if (!particleSystem) yield break;
+		if (!particles) yield break;
 
-		particleSystem.Play();
+		particles.Play();
 
 		yield return new WaitForSeconds(particlesDuration);
 
-		particleSystem.Stop();
+		particles.Stop();
 	}
 
 	public void Process(AlertData data)
@@ -85,10 +83,4 @@ public abstract class Alert : MonoBehaviour
 	protected abstract void SetContent(AlertData data);
 
 	protected abstract TwitchAlertsType Type();
-
-	class LayoutTextParams
-	{
-		public TextMeshWrapper text;
-		public string message;
-	}
 }

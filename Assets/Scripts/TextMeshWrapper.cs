@@ -6,13 +6,13 @@ public class TextMeshWrapper : MonoBehaviour
 	private TextMesh textMesh;
 	public int charsPerLine = 80;
 
-	public AnimationType animation = AnimationType.None;
+	public AnimationType animationType = AnimationType.None;
 	private AnimationProcessor animationProcessor;
 
 	void Awake ()
 	{
 		textMesh = GetComponent<TextMesh>();
-		animationProcessor = animation.AddProcessor(gameObject);
+		animationProcessor = animationType.AddProcessor(gameObject);
 	}
 
 	public string text

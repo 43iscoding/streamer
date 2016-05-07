@@ -1,14 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using System.IO;
 using Random = UnityEngine.Random;
 
 public class TwitchAlertsTest : MonoBehaviour
 {
-	private string pathBase = "C:\\Users\\User\\Desktop\\Twitch Alerts\\";
-	private string extention = ".txt";
-
 	public bool donationMode;
 
 	public KeyCode key = KeyCode.F10;

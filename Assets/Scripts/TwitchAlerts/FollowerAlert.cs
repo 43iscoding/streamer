@@ -30,8 +30,8 @@ public class FollowerAlert : Alert
 
 	protected override IEnumerator ParticleCoroutine()
 	{
-		if (particleSystem == null) yield break;
+		if (particles == null) yield break;
 
-		particleSystem.Emit(1);
+		particles.Emit(1);
 	}
 }
