@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(TextMesh))]
 public class HueShift : MonoBehaviour
 {
-	public TextMesh text;
+	private TextMesh text;
 
 	public float speed = 0.2f;
 
@@ -13,6 +14,7 @@ public class HueShift : MonoBehaviour
 
 	void Start()
 	{
+		text = GetComponent<TextMesh>();
 		if (!text)
 		{
 			Debug.LogError("HueShift init error: TextMesh not set in GameObject " + name);
