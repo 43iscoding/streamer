@@ -12,7 +12,10 @@ public class FollowerAlert : Alert
 	{
 		base.Start();
 		followers = int.Parse(TextFromFile.ReadOnce(TwitchAlertsType.session_follower_count));
-		followerCount.text = followers.ToString();
+		if (followerCount)
+		{
+			followerCount.text = followers.ToString();
+		}
 	}
 
 	protected override void SetContent(AlertData data)
@@ -20,7 +23,10 @@ public class FollowerAlert : Alert
 		//alertText.text = data.username + " just followed!";
 		alertText.text = data.username;
 		followers++;
-		followerCount.text = followers.ToString();
+		if (followerCount)
+		{
+			followerCount.text = followers.ToString();
+		}
 	}
 
 	protected override TwitchAlertsType Type()

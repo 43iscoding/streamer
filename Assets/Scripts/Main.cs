@@ -7,7 +7,7 @@ public class Main : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			//Application.Quit();
+			Application.Quit();
 			return;
 		}
 
@@ -24,6 +24,12 @@ public class Main : MonoBehaviour {
 			SceneManager.LoadScene("New");
 			return;
 		}
-		
+		if (Input.GetKeyDown(KeyCode.F3))
+		{
+			Messenger.Broadcast(WebcamController.onSceneReload);
+			SceneManager.LoadScene("Notifications");
+			return;
+		}
+
 	}
 }

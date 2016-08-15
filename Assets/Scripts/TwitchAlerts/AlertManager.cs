@@ -10,9 +10,14 @@ public class AlertManager : MonoBehaviour
 
 	public DonationAlert[] donationsAlerts;
 
-	public static bool alertInProgress;
+	public static bool alertInProgress;	
 
 	// Use this for initialization
+	void Awake()
+	{
+		//DontDestroyOnLoad(gameObject);
+	}
+
 	void Start () {
 		Messenger.AddListener<AlertData, bool>(TwitchAlertsType.most_recent_follower.ToString(), OnFollowerAlert);
 		Messenger.AddListener<AlertData, bool>(TwitchAlertsType.most_recent_donator.ToString(), OnDonationAlert);
