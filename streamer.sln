@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "streamer.CSharp.Plugins", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "streamer.CSharp", "streamer.CSharp.csproj", "{A0B2FE66-8C19-6104-EE12-5E0FCCB6A3DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "streamer.CSharp.Editor.Plugins", "streamer.CSharp.Editor.Plugins.csproj", "{D760DBEE-92D7-AF0D-D6ED-AB6FDE50FEB7}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "streamer.CSharp.Editor", "streamer.CSharp.Editor.csproj", "{86DE49A1-E1D7-BE5D-FE24-92356F686925}"
 EndProject
 Global
@@ -21,6 +23,10 @@ Global
 		{A0B2FE66-8C19-6104-EE12-5E0FCCB6A3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0B2FE66-8C19-6104-EE12-5E0FCCB6A3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0B2FE66-8C19-6104-EE12-5E0FCCB6A3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D760DBEE-92D7-AF0D-D6ED-AB6FDE50FEB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D760DBEE-92D7-AF0D-D6ED-AB6FDE50FEB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D760DBEE-92D7-AF0D-D6ED-AB6FDE50FEB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D760DBEE-92D7-AF0D-D6ED-AB6FDE50FEB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86DE49A1-E1D7-BE5D-FE24-92356F686925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{86DE49A1-E1D7-BE5D-FE24-92356F686925}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86DE49A1-E1D7-BE5D-FE24-92356F686925}.Release|Any CPU.ActiveCfg = Release|Any CPU
