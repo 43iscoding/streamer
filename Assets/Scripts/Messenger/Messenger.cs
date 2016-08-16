@@ -349,10 +349,10 @@ public sealed class MessengerHelper : MonoBehaviour
 	void Awake()
 	{
 		DontDestroyOnLoad(gameObject);
-		SceneManager.sceneLoaded += OnLevelWasLoaded;
+		SceneManager.sceneLoaded += OnLevelLoaded;
 	}
 
-	public void OnLevelWasLoaded(Scene scene, LoadSceneMode mode)
+	public void OnLevelLoaded(Scene scene, LoadSceneMode mode)
 	{
 		Messenger.Cleanup();
 	}

@@ -93,6 +93,8 @@
     <Compile Include="Assets\Scripts\Moments\Recorder.cs" />
     <Compile Include="Assets\Scripts\Moments\ReflectionUtils.cs" />
     <Compile Include="Assets\Scripts\Moments\Worker.cs" />
+    <Compile Include="Assets\Scripts\NameThatTuna\ParticlePlayer.cs" />
+    <Compile Include="Assets\Scripts\NetworkListener.cs" />
     <Compile Include="Assets\Scripts\ParticleIntensityTune.cs" />
     <Compile Include="Assets\Scripts\ScaleTween.cs" />
     <Compile Include="Assets\Scripts\TextCycle.cs" />

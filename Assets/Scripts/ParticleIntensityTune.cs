@@ -5,28 +5,63 @@ public class ParticleIntensityTune : MonoBehaviour
 {
 	public ParticleSystem particles;
 
+	private ParticleSystem.EmissionModule emission;
+
 	public static readonly float DEFAULT_RATE = 15f;
 
-	public static readonly float MIN_RATE = 7f;
+	public static readonly float MIN_RATE = 5f;
+
+	void Awake()
+	{
+		emission = particles.emission;
+	}
 
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.KeypadPlus))
 		{
-			ParticleSystem.EmissionModule emission = particles.emission;
-			emission.rate = new ParticleSystem.MinMaxCurve(emission.rate.constantMax + 1);
+			emission.rate = new ParticleSystem.MinMaxCurve(GetRate() + 5);
 		}
 
 		if (Input.GetKeyDown(KeyCode.KeypadMinus))
 		{
-			ParticleSystem.EmissionModule emission = particles.emission;
-			emission.rate = new ParticleSystem.MinMaxCurve(emission.rate.constantMax - 1);
+			emission.rate = new ParticleSystem.MinMaxCurve(GetRate() - 5);
 		}
+		if (Input.GetKeyDown(KeyCode.KeypadMultiply))
+		{
+			if (particles.isPlaying)
+			{
+				particles.Stop();
+				particles.Clear();
+			}
+			else
+			{
+				particles.Play();
+			}
+		}
+	}
+
+	private float GetRate()
+	{
+		return emission.rate.constantMax;
 	}
 
 	public void SetRate(float rate)
 	{
-		ParticleSystem.EmissionModule emission = particles.emission;
 		emission.rate = new ParticleSystem.MinMaxCurve(Mathf.Max(MIN_RATE, rate));
+	}
+
+	public void Stop(bool clear = false)
+	{
+		particles.Stop();
+		if (clear)
+		{
+			particles.Clear();
+		}
+	}
+
+	public void Play()
+	{
+		particles.Play();
 	}
 }
