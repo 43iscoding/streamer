@@ -12,7 +12,7 @@ public class TextFromFile : MonoBehaviour
 
 	public TwitchAlertsType type;
 
-	private static string twitchAlertsPath = "C:\\Users\\User\\Desktop\\Twitch Alerts\\";
+	private static string twitchAlertsPath = "D:\\Stream\\TwitchAlerts\\";
 	private static string deepBotPath = "D:\\Software\\Deepbot\\obs\\";
 	private static string extension = ".txt";
 

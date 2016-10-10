@@ -2,23 +2,11 @@
 using System.Linq;
 using UnityEngine;
 
-public class TwitchEmotes : MonoBehaviour
+public static class TwitchEmotes
 {
-	public static TwitchEmotes instance;
-
 	private static Dictionary<string, Vector2> emotes;
 
-	void Awake()
-	{
-		if (instance == null)
-		{
-			instance = this;
-			DontDestroyOnLoad(gameObject);
-		}
-		InitEmotes();
-	}
-
-	void InitEmotes()
+	private static void InitEmotes()
 	{
 		emotes = new Dictionary<string, Vector2>
 		{
@@ -69,18 +57,27 @@ public class TwitchEmotes : MonoBehaviour
 		};
 	}
 
+	private static Dictionary<string, Vector2> Emotes()
+	{
+		if (emotes == null)
+		{
+			InitEmotes();
+		}
+		return emotes;
+	}
+
 	public static string RandomEmote()
 	{
-		return emotes.Keys.ToArray()[Random.Range(0, emotes.Keys.Count - 1)];
+		return Emotes().Keys.ToArray()[Random.Range(0, Emotes().Keys.Count - 1)];
 	}
 
 	public static bool IsEmote(string word)
 	{
-		return emotes.ContainsKey(word.ToUpper());
+		return Emotes().ContainsKey(word.ToUpper());
 	}
 
 	public static Vector2 GetPos(string word)
 	{
-		return emotes[word.ToUpper()];
+		return Emotes()[word.ToUpper()];
 	}
 }
