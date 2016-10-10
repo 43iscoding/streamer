@@ -1,4 +1,5 @@
 Library/
+Streamer_Data/
 obj/
 Temp/
 UnityVS.*
@@ -7,3 +8,4 @@ UnityVS.*
 *.userprefs
 *.sln
 *.user
+*.exe

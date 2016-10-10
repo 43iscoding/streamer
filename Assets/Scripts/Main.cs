@@ -13,20 +13,18 @@ public class Main : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.F1))
 		{
-			Messenger.Broadcast(WebcamController.onSceneReload);
 			SceneManager.LoadScene("StartingSoon");
 			return;
 		}
 
 		if (Input.GetKeyDown(KeyCode.F2))
 		{
-			Messenger.Broadcast(WebcamController.onSceneReload);
-			SceneManager.LoadScene("New");
+			SceneManager.LoadScene("Main");
 			return;
 		}
+
 		if (Input.GetKeyDown(KeyCode.F3))
 		{
-			Messenger.Broadcast(WebcamController.onSceneReload);
 			SceneManager.LoadScene("Notifications");
 			return;
 		}
